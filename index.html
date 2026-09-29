@@ -12,6 +12,23 @@
             --background-color: #f4f7f6;
             --card-bg: #ffffff;
             --text-color: #333333;
+            --subtitle-color: #7f8c8d;
+            --border-color: #e0e0e0;
+            --hover-color: #f8f9fa;
+            --btn-bg: #ffffff;
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #34495e;
+            --pagi-color: #2980b9;
+            --malam-color: #9b59b6;
+            --background-color: #121212;
+            --card-bg: #1e1e1e;
+            --text-color: #e0e0e0;
+            --subtitle-color: #a0a0a0;
+            --border-color: #333333;
+            --hover-color: #2a2a2a;
+            --btn-bg: #1e1e1e;
         }
 
         body {
@@ -20,6 +37,7 @@
             color: var(--text-color);
             margin: 0;
             padding: 15px;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .container {
@@ -29,18 +47,42 @@
             padding: 20px;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: background-color 0.3s ease;
+        }
+
+        /* Header Header dengan Tombol Tema di Atas */
+        .header-top {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+        }
+
+        .theme-toggle {
+            background: var(--btn-bg);
+            border: 2px solid var(--primary-color);
+            color: var(--text-color);
+            padding: 5px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            opacity: 0.8;
         }
 
         h2 {
             text-align: center;
-            color: var(--primary-color);
+            color: var(--text-color);
             margin-bottom: 5px;
             font-size: 1.5rem;
         }
 
         p.subtitle {
             text-align: center;
-            color: #7f8c8d;
+            color: var(--subtitle-color);
             margin-bottom: 20px;
             font-size: 0.95rem;
         }
@@ -55,9 +97,9 @@
         }
 
         .session-btn {
-            background-color: #ffffff;
+            background-color: var(--btn-bg);
             border: 2px solid var(--primary-color);
-            color: var(--primary-color);
+            color: var(--text-color);
             padding: 8px 20px;
             border-radius: 25px;
             cursor: pointer;
@@ -93,13 +135,13 @@
             width: 100%;
             border-collapse: collapse;
             margin-top: 5px;
-            min-width: 500px; /* Mencegah kolom terlalu gepeng di HP */
+            min-width: 500px;
         }
 
         th, td {
             padding: 10px 12px;
             text-align: left;
-            border-bottom: 1px solid #e0e0e0;
+            border-bottom: 1px solid var(--border-color);
             font-size: 0.9rem;
         }
 
@@ -110,7 +152,7 @@
         }
 
         tr:hover {
-            background-color: #f8f9fa;
+            background-color: var(--hover-color);
         }
 
         .badge {
@@ -121,6 +163,7 @@
             display: inline-block;
         }
         
+        /* Warna Badge Jam */
         .time-0830 { background-color: #e8f8f5; color: #16a085; }
         .time-0900 { background-color: #e8f4fd; color: #2980b9; }
         .time-1000 { background-color: #fef5e7; color: #d35400; }
@@ -128,6 +171,13 @@
         
         .time-1830 { background-color: #e8f4fd; color: #2980b9; }
         .time-2000 { background-color: #fef5e7; color: #d35400; }
+
+        [data-theme="dark"] .time-0830 { background-color: #0b3c32; color: #4ee1c1; }
+        [data-theme="dark"] .time-0900 { background-color: #10314b; color: #5dade2; }
+        [data-theme="dark"] .time-1000 { background-color: #4a2800; color: #f39c12; }
+        [data-theme="dark"] .time-1030 { background-color: #381d4a; color: #bb8fce; }
+        [data-theme="dark"] .time-1830 { background-color: #10314b; color: #5dade2; }
+        [data-theme="dark"] .time-2000 { background-color: #4a2800; color: #f39c12; }
 
         .hidden {
             display: none !important;
@@ -137,6 +187,11 @@
 <body>
 
 <div class="container">
+    <!-- Tombol Mode Terang/Gelap dipindah ke baris atas agar tidak menutupi judul -->
+    <div class="header-top">
+        <button class="theme-toggle" id="themeToggleBtn" onclick="toggleTheme()">🌙 Dark Mode</button>
+    </div>
+
     <h2>Jadwal Kuliah TEKFO 2</h2>
     <p class="subtitle">UNIPEM — Sistem Informasi & Teknik Informatika</p>
 
@@ -313,6 +368,30 @@
             tabelPagi.classList.add('hidden');
         }
     }
+
+    function toggleTheme() {
+        const htmlElement = document.documentElement;
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        
+        if (htmlElement.getAttribute('data-theme') === 'dark') {
+            htmlElement.removeAttribute('data-theme');
+            themeToggleBtn.innerHTML = '🌙 Dark Mode';
+            localStorage.setItem('theme', 'light');
+        } else {
+            htmlElement.setAttribute('data-theme', 'dark');
+            themeToggleBtn.innerHTML = '☀️ Light Mode';
+            localStorage.setItem('theme', 'dark');
+        }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('theme');
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        if (savedTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeToggleBtn.innerHTML = '☀️ Light Mode';
+        }
+    });
 </script>
 
 </body>
