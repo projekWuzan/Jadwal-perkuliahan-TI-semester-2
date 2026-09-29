@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jadwal Kuliah TEKFO 2 - UNIPEM</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --pagi-color: #3498db;
+            --malam-color: #8e44ad;
+            --background-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        p.subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 25px;
+        }
+
+        /* Tombol Pilihan Sesi (Pagi / Malam) */
+        .session-selector {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .session-btn {
+            background-color: #ffffff;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 10px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .session-btn.active#btnPagi {
+            background-color: var(--pagi-color);
+            border-color: var(--pagi-color);
+            color: white;
+        }
+
+        .session-btn.active#btnMalam {
+            background-color: var(--malam-color);
+            border-color: var(--malam-color);
+            color: white;
+        }
+
+        .session-btn#btnPagi:hover {
+            border-color: var(--pagi-color);
+            color: var(--pagi-color);
+        }
+
+        .session-btn#btnMalam:hover {
+            border-color: var(--malam-color);
+            color: var(--malam-color);
+        }
+
+        /* Tabel Jadwal */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .badge {
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        .time-0830 { background-color: #e8f8f5; color: #16a085; }
+        .time-0900 { background-color: #e8f4fd; color: #2980b9; }
+        .time-1000 { background-color: #fef5e7; color: #d35400; }
+        .time-1030 { background-color: #f4ecf7; color: #8e44ad; }
+        
+        .time-1830 { background-color: #e8f4fd; color: #2980b9; }
+        .time-2000 { background-color: #fef5e7; color: #d35400; }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Jadwal Kuliah TEKFO 2 - UNIPEM</h2>
+    <p class="subtitle">Sistem Informasi & Teknik Informatika</p>
+
+    <!-- Tombol Pilih Sesi -->
+    <div class="session-selector">
+        <button class="session-btn active" id="btnPagi" onclick="gantiSesi('pagi')">☀️ Sesi Pagi</button>
+        <button class="session-btn" id="btnMalam" onclick="gantiSesi('malam')">🌙 Sesi Malam</button>
+    </div>
+
+    <!-- Tabel Sesi Pagi -->
+    <div id="tabelPagi" class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Hari</th>
+                    <th>Jam</th>
+                    <th>Mata Kuliah</th>
+                    <th>Dosen</th>
+                    <th>Ruang</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Senin</strong></td>
+                    <td><span class="badge time-0900">09.00</span></td>
+                    <td>Pendidikan Agama</td>
+                    <td>Aliah</td>
+                    <td>FB202</td>
+                </tr>
+                <tr>
+                    <td><strong>Senin</strong></td>
+                    <td><span class="badge time-1030">10.30</span></td>
+                    <td>Sistem Basis Data</td>
+                    <td>Henry</td>
+                    <td>FB202</td>
+                </tr>
+                <tr>
+                    <td><strong>Kamis</strong></td>
+                    <td><span class="badge time-0900">09.00</span></td>
+                    <td>Matematika 2</td>
+                    <td>Filah</td>
+                    <td>FK502</td>
+                </tr>
+                <tr>
+                    <td><strong>Kamis</strong></td>
+                    <td><span class="badge time-1030">10.30</span></td>
+                    <td>Hukum & Etika TI</td>
+                    <td>Yulis</td>
+                    <td>FK502</td>
+                </tr>
+                <tr>
+                    <td><strong>Jumat</strong></td>
+                    <td><span class="badge time-0830">08.30</span></td>
+                    <td>Struktur Data</td>
+                    <td>Nur</td>
+                    <td>FB203</td>
+                </tr>
+                <tr>
+                    <td><strong>Jumat</strong></td>
+                    <td><span class="badge time-1000">10.00</span></td>
+                    <td>Pemrograman Dasar</td>
+                    <td>Rintis</td>
+                    <td>LABFB604</td>
+                </tr>
+                <tr>
+                    <td><strong>Sabtu</strong></td>
+                    <td><span class="badge time-0900">09.00</span></td>
+                    <td>Kom. Data & Jarkom</td>
+                    <td>Edy</td>
+                    <td>FB304</td>
+                </tr>
+                <tr>
+                    <td><strong>Sabtu</strong></td>
+                    <td><span class="badge time-1030">10.30</span></td>
+                    <td>English For Comp</td>
+                    <td>Eva</td>
+                    <td>FB304</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Tabel Sesi Malam -->
+    <div id="tabelMalam" class="table-container hidden">
+        <table>
+            <thead>
+                <tr>
+                    <th>Hari</th>
+                    <th>Jam</th>
+                    <th>Mata Kuliah</th>
+                    <th>Dosen</th>
+                    <th>Ruang</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Senin</strong></td>
+                    <td><span class="badge time-1830">18.30</span></td>
+                    <td>Komunikasi Data & Jarkom</td>
+                    <td>Aminul</td>
+                    <td>FK403</td>
+                </tr>
+                <tr>
+                    <td><strong>Senin</strong></td>
+                    <td><span class="badge time-2000">20.00</span></td>
+                    <td>Matematika 2</td>
+                    <td>Vanes</td>
+                    <td>FK403</td>
+                </tr>
+                <tr>
+                    <td><strong>Selasa</strong></td>
+                    <td><span class="badge time-1830">18.30</span></td>
+                    <td>Pendidikan Agama</td>
+                    <td>Yani</td>
+                    <td>FB401</td>
+                </tr>
+                <tr>
+                    <td><strong>Selasa</strong></td>
+                    <td><span class="badge time-2000">20.00</span></td>
+                    <td>Struktur Data</td>
+                    <td>Nur</td>
+                    <td>FB403</td>
+                </tr>
+                <tr>
+                    <td><strong>Rabu</strong></td>
+                    <td><span class="badge time-1830">18.30</span></td>
+                    <td>Sist. Basis Data</td>
+                    <td>Nana</td>
+                    <td>FB301</td>
+                </tr>
+                <tr>
+                    <td><strong>Rabu</strong></td>
+                    <td><span class="badge time-2000">20.00</span></td>
+                    <td>Pemrograman Dasar</td>
+                    <td>Jainuri</td>
+                    <td>LABFB602</td>
+                </tr>
+                <tr>
+                    <td><strong>Kamis</strong></td>
+                    <td><span class="badge time-1830">18.30</span></td>
+                    <td>Hukum & Etika TI</td>
+                    <td>Yoga</td>
+                    <td>FK301</td>
+                </tr>
+                <tr>
+                    <td><strong>Kamis</strong></td>
+                    <td><span class="badge time-2000">20.00</span></td>
+                    <td>English For Comp</td>
+                    <td>Aris</td>
+                    <td>FK301</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<script>
+    function gantiSesi(sesi) {
+        const btnPagi = document.getElementById('btnPagi');
+        const btnMalam = document.getElementById('btnMalam');
+        const tabelPagi = document.getElementById('tabelPagi');
+        const tabelMalam = document.getElementById('tabelMalam');
+
+        if (sesi === 'pagi') {
+            btnPagi.classList.add('active');
+            btnMalam.classList.remove('active');
+            tabelPagi.classList.remove('hidden');
+            tabelMalam.classList.add('hidden');
+        } else {
+            btnMalam.classList.add('active');
+            btnPagi.classList.remove('active');
+            tabelMalam.classList.remove('hidden');
+            tabelPagi.classList.add('hidden');
+        }
+    }
+</script>
+
+</body>
+</html>
