@@ -19,14 +19,14 @@
             background-color: var(--background-color);
             color: var(--text-color);
             margin: 0;
-            padding: 20px;
+            padding: 15px;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 850px;
             margin: auto;
             background: var(--card-bg);
-            padding: 25px;
+            padding: 20px;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         }
@@ -34,33 +34,40 @@
         h2 {
             text-align: center;
             color: var(--primary-color);
-            margin-bottom: 10px;
+            margin-bottom: 5px;
+            font-size: 1.5rem;
         }
 
         p.subtitle {
             text-align: center;
             color: #7f8c8d;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
         }
 
-        /* Tombol Pilihan Sesi (Pagi / Malam) */
+        /* Tombol Pilihan Sesi */
         .session-selector {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 25px;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
         }
 
         .session-btn {
             background-color: #ffffff;
             border: 2px solid var(--primary-color);
             color: var(--primary-color);
-            padding: 10px 25px;
-            border-radius: 30px;
+            padding: 8px 20px;
+            border-radius: 25px;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: bold;
             transition: all 0.3s ease;
+            flex: 1;
+            min-width: 130px;
+            max-width: 180px;
+            text-align: center;
         }
 
         .session-btn.active#btnPagi {
@@ -75,27 +82,25 @@
             color: white;
         }
 
-        .session-btn#btnPagi:hover {
-            border-color: var(--pagi-color);
-            color: var(--pagi-color);
+        /* Responsive Table Container */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
-        .session-btn#btnMalam:hover {
-            border-color: var(--malam-color);
-            color: var(--malam-color);
-        }
-
-        /* Tabel Jadwal */
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
+            margin-top: 5px;
+            min-width: 500px; /* Mencegah kolom terlalu gepeng di HP */
         }
 
         th, td {
-            padding: 12px 15px;
+            padding: 10px 12px;
             text-align: left;
             border-bottom: 1px solid #e0e0e0;
+            font-size: 0.9rem;
         }
 
         th {
@@ -109,11 +114,13 @@
         }
 
         .badge {
-            padding: 5px 10px;
+            padding: 4px 8px;
             border-radius: 6px;
             font-weight: bold;
-            font-size: 0.9em;
+            font-size: 0.85em;
+            display: inline-block;
         }
+        
         .time-0830 { background-color: #e8f8f5; color: #16a085; }
         .time-0900 { background-color: #e8f4fd; color: #2980b9; }
         .time-1000 { background-color: #fef5e7; color: #d35400; }
@@ -130,8 +137,8 @@
 <body>
 
 <div class="container">
-    <h2>Jadwal Kuliah TEKFO 2 - UNIPEM</h2>
-    <p class="subtitle">Sistem Informasi & Teknik Informatika</p>
+    <h2>Jadwal Kuliah TEKFO 2</h2>
+    <p class="subtitle">UNIPEM — Sistem Informasi & Teknik Informatika</p>
 
     <!-- Tombol Pilih Sesi -->
     <div class="session-selector">
@@ -140,7 +147,7 @@
     </div>
 
     <!-- Tabel Sesi Pagi -->
-    <div id="tabelPagi" class="table-container">
+    <div id="tabelPagi" class="table-responsive">
         <table>
             <thead>
                 <tr>
@@ -213,7 +220,7 @@
     </div>
 
     <!-- Tabel Sesi Malam -->
-    <div id="tabelMalam" class="table-container hidden">
+    <div id="tabelMalam" class="table-responsive hidden">
         <table>
             <thead>
                 <tr>
